@@ -59,19 +59,60 @@ echo -e "${CYAN}=========================================${NEUTRE}"
 echo -e "Prépare ton projet pour le pilotage d'agent."
 echo ""
 
+CHOIX="$1"
+DOSSIER_CIBLE="$2"
+
+# Déterminer si un terminal interactif ou /dev/tty est disponible
+HAS_TTY=false
+if [ -t 0 ]; then
+  HAS_TTY=true
+elif ( true < /dev/tty ) 2>/dev/null; then
+  HAS_TTY=true
+fi
+
+# Fonction pour lire une entrée de manière robuste
+lire_entree() {
+  local prompt="$1"
+  local var_name="$2"
+  local default_val="$3"
+  local val=""
+
+  if [ -t 0 ]; then
+    read -r -p "$prompt" val
+  elif ( true < /dev/tty ) 2>/dev/null; then
+    read -r -p "$prompt" val < /dev/tty
+  else
+    val="$default_val"
+  fi
+
+  if [ -z "$val" ]; then
+    val="$default_val"
+  fi
+
+  eval "$var_name=\"\$val\""
+}
+
 # Choix de l'agent
-echo -e "Quel agent de codage utilises-tu ?"
-echo -e "1) ${VERT}GitHub Copilot${NEUTRE}"
-echo -e "2) ${VERT}Claude Code${NEUTRE}"
-echo -e "3) ${VERT}Autre${NEUTRE} (Dossier générique .agents)"
-echo ""
-read -r -p "Saisis ton choix (1, 2 ou 3) : " CHOIX < /dev/tty
-echo ""
+if [ -z "$CHOIX" ]; then
+  echo -e "Quel agent de codage utilises-tu ?"
+  echo -e "1) ${VERT}GitHub Copilot${NEUTRE}"
+  echo -e "2) ${VERT}Claude Code${NEUTRE}"
+  echo -e "3) ${VERT}Autre${NEUTRE} (Dossier générique .agents)"
+  echo ""
+
+  if [ "$HAS_TTY" = false ]; then
+    echo -e "${ROUGE}Erreur : script non interactif et aucun argument fourni.${NEUTRE}"
+    echo -e "Usage : curl -fsSL ... | bash -s -- <choix_agent> [dossier_cible]"
+    exit 1
+  fi
+
+  lire_entree "Saisis ton choix (1, 2 ou 3) : " CHOIX
+  echo ""
+fi
 
 # Choix du dossier cible
-read -r -p "Où se trouve ton dossier cible ? (Défaut : .) : " DOSSIER_CIBLE < /dev/tty
 if [ -z "$DOSSIER_CIBLE" ]; then
-  DOSSIER_CIBLE="."
+  lire_entree "Où se trouve ton dossier cible ? (Défaut : .) : " DOSSIER_CIBLE "."
 fi
 
 # Créer le dossier s'il n'existe pas
