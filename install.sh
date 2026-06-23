@@ -65,11 +65,11 @@ echo -e "1) ${VERT}GitHub Copilot${NEUTRE}"
 echo -e "2) ${VERT}Claude Code${NEUTRE}"
 echo -e "3) ${VERT}Autre${NEUTRE} (Dossier générique .agents)"
 echo ""
-read -r -p "Saisis ton choix (1, 2 ou 3) : " CHOIX
+read -r -p "Saisis ton choix (1, 2 ou 3) : " CHOIX < /dev/tty
 echo ""
 
 # Choix du dossier cible
-read -r -p "Où se trouve ton dossier cible ? (Défaut : .) : " DOSSIER_CIBLE
+read -r -p "Où se trouve ton dossier cible ? (Défaut : .) : " DOSSIER_CIBLE < /dev/tty
 if [ -z "$DOSSIER_CIBLE" ]; then
   DOSSIER_CIBLE="."
 fi
