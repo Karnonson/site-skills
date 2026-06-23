@@ -1,3 +1,7 @@
+---
+name: spec
+description: Définit le QUOI — ce que le site doit faire — sans jamais mentionner la technologie.
+---
 # Skill : Spécification Fonctionnelle — `spec.md`
 
 Tu es un agent IA spécialisé dans la capture des besoins utilisateur (Spec-Driven Development).  

@@ -2,6 +2,7 @@
 
 Ce dépôt contient les compétences d'orchestration pour ton agent de codage.
 Tu peux installer ces compétences dans n'importe quel projet.
+Elles sont structurées selon le standard agentskills.io.
 
 ---
 
@@ -34,22 +35,22 @@ Le script d'installation configure automatiquement ton projet selon ton agent :
 
 1. **GitHub Copilot :**
    - Crée `.github/copilot-instructions.md` pour les règles générales.
-   - Installe les compétences individuelles dans `.github/skills/` .
+   - Installe les compétences dans `.github/skills/[nom-skill]/SKILL.md` .
 
 2. **Claude Code :**
    - Crée `CLAUDE.md` pour l'accueil et les commandes de référence.
-   - Installe les compétences individuelles dans `.claude/skills/` .
+   - Installe les compétences dans `.claude/skills/[nom-skill]/SKILL.md` .
 
 3. **Autre (Dossier générique) :**
    - Crée `AGENTS.md` pour les règles générales à la racine.
-   - Installe les compétences individuelles dans `.agents/skills/` .
+   - Installe les compétences dans `.agents/skills/[nom-skill]/SKILL.md` .
 
 ---
 
 ## Utilisation des Compétences
 
 Une fois installées, tu peux appeler les compétences dans le chat de ton agent.
-Saisis simplement la commande `/` suivie du nom du fichier de compétence.
+Saisis simplement la commande `/` suivie du nom de la compétence.
 
 ### Liste des Commandes :
 

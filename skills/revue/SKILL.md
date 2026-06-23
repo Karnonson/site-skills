@@ -1,3 +1,7 @@
+---
+name: revue
+description: Effectue une revue de code rigoureuse avant de finaliser les changements.
+---
 # Skill : Revue de Code
 
 Tu es un agent IA spécialisé dans la revue de code (Spec-Driven Development).  

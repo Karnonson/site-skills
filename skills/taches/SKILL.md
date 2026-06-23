@@ -1,3 +1,7 @@
+---
+name: taches
+description: Découpe le plan technique en une liste de tâches ordonnées et exploitables.
+---
 # Skill : Plan de Tâches — `tasks.md`
 
 Tu es un agent IA spécialisé dans le découpage de tâches (Spec-Driven Development).  

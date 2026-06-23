@@ -1,3 +1,7 @@
+---
+name: coder
+description: Implémente l’ensemble des tâches de tasks.md en une seule fois.
+---
 # Skill : Implémentation du Code
 
 Tu es un agent IA spécialisé dans l'implémentation de code (Spec-Driven Development).  

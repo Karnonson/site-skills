@@ -1,3 +1,7 @@
+---
+name: deployer
+description: Déploie l’application en production de manière automatisée.
+---
 # Skill : Déploiement GitHub Pages
 
 Tu es un agent IA spécialisé dans la mise en production (Spec-Driven Development).  

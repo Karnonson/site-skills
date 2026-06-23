@@ -1,3 +1,7 @@
+---
+name: tester
+description: Valide le bon fonctionnement et le rendu visuel dans le navigateur.
+---
 # Skill : Test Navigateur & Validation Locale
 
 Tu es un agent IA spécialisé dans la validation de rendu en direct (Spec-Driven Development).  

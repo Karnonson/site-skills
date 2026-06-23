@@ -1,3 +1,7 @@
+---
+name: plan
+description: Définit le COMMENT — comment construire ce que spec.md décrit.
+---
 # Skill : Plan Technique — `plan.md`
 
 Tu es un agent IA spécialisé dans la conception d'architecture technique (Spec-Driven Development).  

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Script d'installation des compétences (Skills) pour agents IA.
+# Script d'installation des compétences (Skills) pour agents IA (agentskills.io).
 # Auteur : Karnonson (WebModerne)
 
 # Couleurs pour l'affichage console (esthétique premium)
@@ -18,31 +18,34 @@ if [ -d "$SCRIPT_DIR/skills" ]; then
   IS_LOCAL=true
 fi
 
-RAW_BASE_URL="https://raw.githubusercontent.com/Karnonson/site-skills/main/skills"
+RAW_BASE_URL="https://raw.githubusercontent.com/Karnonson/site-skills/main"
 
 SKILLS=(
-  "clarifier.md"
-  "spec.md"
-  "plan.md"
-  "taches.md"
-  "coder.md"
-  "revue.md"
-  "tester.md"
-  "deployer.md"
+  "clarifier"
+  "spec"
+  "plan"
+  "taches"
+  "coder"
+  "revue"
+  "tester"
+  "deployer"
 )
 
 # Fonction de téléchargement ou copie
 recuperer_fichier() {
-  local source_nom="$1"
+  local source_relatif="$1"
   local dest_path="$2"
 
+  # Assurer la création du dossier parent
+  mkdir -p "$(dirname "$dest_path")"
+
   if [ "$IS_LOCAL" = true ]; then
-    cp "$SCRIPT_DIR/skills/$source_nom" "$dest_path"
+    cp "$SCRIPT_DIR/$source_relatif" "$dest_path"
   else
     if command -v curl >/dev/null 2>&1; then
-      curl -fsSL "$RAW_BASE_URL/$source_nom" -o "$dest_path"
+      curl -fsSL "$RAW_BASE_URL/$source_relatif" -o "$dest_path"
     elif command -v wget >/dev/null 2>&1; then
-      wget -q "$RAW_BASE_URL/$source_nom" -O "$dest_path"
+      wget -q "$RAW_BASE_URL/$source_relatif" -O "$dest_path"
     else
       echo -e "${ROUGE}Erreur : ni curl ni wget n'est disponible.${NEUTRE}"
       exit 1
@@ -79,34 +82,32 @@ case "$CHOIX" in
   1)
     echo -e "${BLEU}Installation pour GitHub Copilot...${NEUTRE}"
     
-    # Créer l'arborescence Copilot
-    mkdir -p "$DOSSIER_CIBLE/.github/skills"
-    
-    # 1. Installer le fichier principal copilot-instructions.md
-    recuperer_fichier "copilot-instructions.md" "$DOSSIER_CIBLE/.github/copilot-instructions.md"
+    # 1. Copier le fichier d'instructions générales
+    recuperer_fichier "instructions.md" "$DOSSIER_CIBLE/.github/copilot-instructions.md"
     
     # Ajouter la référence des compétences dans le fichier principal
     {
       echo ""
       echo "## Compétences Disponibles"
       echo ""
-      echo "Tu as accès à des compétences spécifiques sous forme de fichiers Markdown."
-      echo "Ils sont situés dans le dossier '.github/skills/'."
+      echo "Tu as accès à des compétences spécifiques sous forme de dossiers conformes à agentskills.io."
+      echo "Ils se trouvent dans '.github/skills/'."
+      echo "Chaque compétence contient un fichier 'SKILL.md' définissant ses métadonnées et ses consignes."
       echo "Lis attentivement ces fichiers avant de commencer chaque phase :"
-      echo "- Pour clarifier l'idée : '.github/skills/clarifier.md'"
-      echo "- Pour rédiger le cahier des charges : '.github/skills/spec.md'"
-      echo "- Pour concevoir l'architecture : '.github/skills/plan.md'"
-      echo "- Pour lister et suivre les tâches : '.github/skills/taches.md'"
-      echo "- Pour coder le projet : '.github/skills/coder.md'"
-      echo "- Pour faire la revue de code : '.github/skills/revue.md'"
-      echo "- Pour tester le site : '.github/skills/tester.md'"
-      echo "- Pour déployer le projet : '.github/skills/deployer.md'"
+      echo "- Pour clarifier l'idée : '.github/skills/clarifier/SKILL.md'"
+      echo "- Pour rédiger le cahier des charges : '.github/skills/spec/SKILL.md'"
+      echo "- Pour concevoir l'architecture : '.github/skills/plan/SKILL.md'"
+      echo "- Pour lister et suivre les tâches : '.github/skills/taches/SKILL.md'"
+      echo "- Pour coder le projet : '.github/skills/coder/SKILL.md'"
+      echo "- Pour faire la revue de code : '.github/skills/revue/SKILL.md'"
+      echo "- Pour tester le site : '.github/skills/tester/SKILL.md'"
+      echo "- Pour déployer le projet : '.github/skills/deployer/SKILL.md'"
     } >> "$DOSSIER_CIBLE/.github/copilot-instructions.md"
 
-    # 2. Installer les compétences individuelles
+    # 2. Installer les compétences individuelles au format agentskills.io
     for skill in "${SKILLS[@]}"; do
-      echo -e "Copie de la compétence : $skill"
-      recuperer_fichier "$skill" "$DOSSIER_CIBLE/.github/skills/$skill"
+      echo -e "Copie du skill agentskills.io : $skill"
+      recuperer_fichier "skills/$skill/SKILL.md" "$DOSSIER_CIBLE/.github/skills/$skill/SKILL.md"
     done
     
     echo ""
@@ -117,32 +118,30 @@ case "$CHOIX" in
   2)
     echo -e "${BLEU}Installation pour Claude Code...${NEUTRE}"
     
-    # Créer l'arborescence Claude Code
-    mkdir -p "$DOSSIER_CIBLE/.claude/skills"
+    # 1. Copier le fichier d'instructions générales
+    recuperer_fichier "instructions.md" "$DOSSIER_CIBLE/CLAUDE.md"
     
-    # 1. Créer le fichier CLAUDE.md général
-    cat << 'EOF' > "$DOSSIER_CIBLE/CLAUDE.md"
-# Projet Orchestré
+    # Ajouter la référence des compétences dans le fichier principal
+    {
+      echo ""
+      echo "## Commandes de Référence (Skills)"
+      echo ""
+      echo "Les compétences spécifiques se trouvent sous forme de dossiers agentskills.io dans '.claude/skills/'."
+      echo "Pour charger ou exécuter une compétence, saisis '/' suivi du nom de la compétence (ex: /spec) :"
+      echo "- Pour clarifier ton idée : '/clarifier' ou lis '.claude/skills/clarifier/SKILL.md'"
+      echo "- Pour rédiger les spécifications : '/spec' ou lis '.claude/skills/spec/SKILL.md'"
+      echo "- Pour concevoir le plan technique : '/plan' ou lis '.claude/skills/plan/SKILL.md'"
+      echo "- Pour lister et suivre les tâches : '/taches' ou lis '.claude/skills/taches/SKILL.md'"
+      echo "- Pour implémenter le code : '/coder' ou lis '.claude/skills/coder/SKILL.md'"
+      echo "- Pour faire une revue de code : '/revue' ou lis '.claude/skills/revue/SKILL.md'"
+      echo "- Pour tester dans le navigateur : '/tester' ou lis '.claude/skills/tester/SKILL.md'"
+      echo "- Pour déployer le projet : '/deployer' ou lis '.claude/skills/deployer/SKILL.md'"
+    } >> "$DOSSIER_CIBLE/CLAUDE.md"
 
-Ce projet utilise le Spec-Driven Development (développement dirigé par les spécifications).
-Les compétences détaillées de l'agent se trouvent dans le dossier `.claude/skills/`.
-
-## Commandes de Référence
-
-- Pour clarifier ton idée : `/clarifier` ou lis `.claude/skills/clarifier.md`
-- Pour rédiger les spécifications : `/spec` ou lis `.claude/skills/spec.md`
-- Pour concevoir le plan technique : `/plan` ou lis `.claude/skills/plan.md`
-- Pour lister et suivre les tâches : `/taches` ou lis `.claude/skills/taches.md`
-- Pour implémenter le code : `/coder` ou lis `.claude/skills/coder.md`
-- Pour faire une revue de code : `/revue` ou lis `.claude/skills/revue.md`
-- Pour tester dans le navigateur : `/tester` ou lis `.claude/skills/tester.md`
-- Pour déployer le projet : `/deployer` ou lis `.claude/skills/deployer.md`
-EOF
-
-    # 2. Installer les compétences individuelles
+    # 2. Installer les compétences individuelles au format agentskills.io
     for skill in "${SKILLS[@]}"; do
-      echo -e "Copie de la compétence : $skill"
-      recuperer_fichier "$skill" "$DOSSIER_CIBLE/.claude/skills/$skill"
+      echo -e "Copie du skill agentskills.io : $skill"
+      recuperer_fichier "skills/$skill/SKILL.md" "$DOSSIER_CIBLE/.claude/skills/$skill/SKILL.md"
     done
     
     echo ""
@@ -153,32 +152,30 @@ EOF
   3)
     echo -e "${BLEU}Installation du dossier générique .agents...${NEUTRE}"
     
-    # Créer l'arborescence générique
-    mkdir -p "$DOSSIER_CIBLE/.agents/skills"
+    # 1. Copier le fichier d'instructions générales
+    recuperer_fichier "instructions.md" "$DOSSIER_CIBLE/AGENTS.md"
     
-    # 1. Créer le fichier AGENTS.md général
-    cat << 'EOF' > "$DOSSIER_CIBLE/AGENTS.md"
-# Orchestration des Agents
+    # Ajouter la référence des compétences dans le fichier principal
+    {
+      echo ""
+      echo "## Compétences Disponibles (Skills)"
+      echo ""
+      echo "Les compétences spécifiques se trouvent sous forme de dossiers agentskills.io dans '.agents/skills/'."
+      echo "Chaque dossier contient un fichier 'SKILL.md' définissant les consignes associées :"
+      echo "- Clarification de l'idée : '.agents/skills/clarifier/SKILL.md' (commande '/clarifier')"
+      echo "- Spécification : '.agents/skills/spec/SKILL.md' (commande '/spec')"
+      echo "- Plan technique : '.agents/skills/plan/SKILL.md' (commande '/plan')"
+      echo "- Liste de tâches : '.agents/skills/taches/SKILL.md' (commande '/taches')"
+      echo "- Implémentation : '.agents/skills/coder/SKILL.md' (commande '/coder')"
+      echo "- Revue de code : '.agents/skills/revue/SKILL.md' (commande '/revue')"
+      echo "- Tests navigateur : '.agents/skills/tester/SKILL.md' (commande '/tester')"
+      echo "- Déploiement : '.agents/skills/deployer/SKILL.md' (commande '/deployer')"
+    } >> "$DOSSIER_CIBLE/AGENTS.md"
 
-Les règles générales et les compétences pour guider les agents de codage.
-Les compétences détaillées se trouvent dans le dossier `.agents/skills/`.
-
-## Compétences Disponibles
-
-- Clarification de l'idée : `/clarifier` ou `.agents/skills/clarifier.md`
-- Spécification : `/spec` ou `.agents/skills/spec.md`
-- Plan technique : `/plan` ou `.agents/skills/plan.md`
-- Liste de tâches : `/taches` ou `.agents/skills/taches.md`
-- Implémentation : `/coder` ou `.agents/skills/coder.md`
-- Revue de code : `/revue` ou `.agents/skills/revue.md`
-- Tests navigateur : `/tester` ou `.agents/skills/tester.md`
-- Déploiement : `/deployer` ou `.agents/skills/deployer.md`
-EOF
-
-    # 2. Installer les compétences individuelles
+    # 2. Installer les compétences individuelles au format agentskills.io
     for skill in "${SKILLS[@]}"; do
-      echo -e "Copie de la compétence : $skill"
-      recuperer_fichier "$skill" "$DOSSIER_CIBLE/.agents/skills/$skill"
+      echo -e "Copie du skill agentskills.io : $skill"
+      recuperer_fichier "skills/$skill/SKILL.md" "$DOSSIER_CIBLE/.agents/skills/$skill/SKILL.md"
     done
     
     echo ""
