@@ -1,6 +1,11 @@
 # Script d'installation des compétences (Skills) pour agents IA (agentskills.io) en PowerShell.
 # Auteur : Karnonson (WebModerne)
 
+param (
+    [string]$Choix,
+    [string]$DossierCible
+)
+
 # Configurer la console pour supporter l'UTF-8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
@@ -54,18 +59,35 @@ Write-Host "=========================================" -ForegroundColor Cyan
 Write-Host "Prépare ton projet pour le pilotage d'agent."
 Write-Host ""
 
-Write-Host "Quel agent de codage utilises-tu ?"
-Write-Host "1) GitHub Copilot" -ForegroundColor Green
-Write-Host "2) Claude Code" -ForegroundColor Green
-Write-Host "3) Autre (Dossier générique .agents)" -ForegroundColor Green
-Write-Host ""
+if ([string]::IsNullOrWhiteSpace($Choix)) {
+    Write-Host "Quel agent de codage utilises-tu ?"
+    Write-Host "1) GitHub Copilot" -ForegroundColor Green
+    Write-Host "2) Claude Code" -ForegroundColor Green
+    Write-Host "3) Autre (Dossier générique .agents)" -ForegroundColor Green
+    Write-Host ""
 
-$Choix = Read-Host "Saisis ton choix (1, 2 ou 3) "
-Write-Host ""
+    # Détecter si la session est non interactive
+    $argsList = [Environment]::GetCommandLineArgs()
+    $isNonInteractive = $argsList | Where-Object { $_ -like '-NonI*' }
+    if ($isNonInteractive) {
+        Write-Host "Erreur : session non interactive et aucun argument fourni." -ForegroundColor Red
+        Write-Host "Usage : .\install.ps1 -Choix <1|2|3> [-DossierCible <chemin>]" -ForegroundColor Red
+        Exit 1
+    }
 
-$DossierCible = Read-Host "Où se trouve ton dossier cible ? (Défaut : .) "
+    $Choix = Read-Host "Saisis ton choix (1, 2 ou 3) "
+    Write-Host ""
+}
+
 if ([string]::IsNullOrWhiteSpace($DossierCible)) {
-    $DossierCible = "."
+    $argsList = [Environment]::GetCommandLineArgs()
+    $isNonInteractive = $argsList | Where-Object { $_ -like '-NonI*' }
+    if (!$isNonInteractive) {
+        $DossierCible = Read-Host "Où se trouve ton dossier cible ? (Défaut : .) "
+    }
+    if ([string]::IsNullOrWhiteSpace($DossierCible)) {
+        $DossierCible = "."
+    }
 }
 
 # Créer le dossier s'il n'existe pas
