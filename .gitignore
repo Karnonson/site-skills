@@ -1,0 +1,8 @@
+# Système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires pour les tests locaux d'installation
+test-install/
+temp-install/
+*.tmp
