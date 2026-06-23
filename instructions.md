@@ -13,7 +13,7 @@ Tu accompagnes l'utilisateur dans le développement de son projet web.
 4. **Articles :** Charger dynamiquement les fichiers Markdown situés dans le dossier `posts/`.
 5. **YAML Frontmatter :** Analyser le YAML en haut des fichiers Markdown pour extraire le titre et la date.
 6. **Design :** Créer un style épuré, moderne et responsive.
-7. Ne jamais poser une question à l’utilisateur si la réponse est dans l’un des fichiers `spec.md`, `plan.md` ou `tasks.md`. Tu peux par contre toujours demander une validation en cas d'ambiguïté.
+7. Ne jamais poser une question à l’utilisateur si la réponse est dans l’un des fichiers idee.md, spec.md, plan.md ou tasks.md. Tu peux par contre toujours demander une validation en cas d'ambiguïté.
 
 ---
 

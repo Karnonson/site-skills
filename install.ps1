@@ -113,10 +113,10 @@ Tu as accès à des compétences spécifiques sous forme de dossiers conformes �
 Ils se trouvent dans '.github/skills/'.
 Chaque compétence contient un fichier 'SKILL.md' définissant ses métadonnées et ses consignes.
 Lis attentivement ces fichiers avant de commencer chaque phase :
-- Pour clarifier l'idée : '.github/skills/clarifier/SKILL.md'
-- Pour rédiger le cahier des charges : '.github/skills/spec/SKILL.md'
-- Pour concevoir l'architecture : '.github/skills/plan/SKILL.md'
-- Pour lister et suivre les tâches : '.github/skills/taches/SKILL.md'
+- Pour clarifier l'idée (génère 'idee.md') : '.github/skills/clarifier/SKILL.md'
+- Pour rédiger le cahier des charges (génère 'spec.md') : '.github/skills/spec/SKILL.md'
+- Pour concevoir l'architecture (génère 'plan.md') : '.github/skills/plan/SKILL.md'
+- Pour lister et suivre les tâches (génère 'tasks.md') : '.github/skills/taches/SKILL.md'
 - Pour coder le projet : '.github/skills/coder/SKILL.md'
 - Pour faire la revue de code : '.github/skills/revue/SKILL.md'
 - Pour tester le site : '.github/skills/tester/SKILL.md'
@@ -151,10 +151,10 @@ Lis attentivement ces fichiers avant de commencer chaque phase :
 
 Les compétences spécifiques se trouvent sous forme de dossiers agentskills.io dans '.claude/skills/'.
 Pour charger ou exécuter une compétence, saisis '/' suivi du nom de la compétence (ex: /spec) :
-- Pour clarifier ton idée : '/clarifier' ou lis '.claude/skills/clarifier/SKILL.md'
-- Pour rédiger les spécifications : '/spec' ou lis '.claude/skills/spec/SKILL.md'
-- Pour concevoir le plan technique : '/plan' ou lis '.claude/skills/plan/SKILL.md'
-- Pour lister et suivre les tâches : '/taches' ou lis '.claude/skills/taches/SKILL.md'
+- Pour clarifier ton idée (génère 'idee.md') : '/clarifier' ou lis '.claude/skills/clarifier/SKILL.md'
+- Pour rédiger les spécifications (génère 'spec.md') : '/spec' ou lis '.claude/skills/spec/SKILL.md'
+- Pour concevoir le plan technique (génère 'plan.md') : '/plan' ou lis '.claude/skills/plan/SKILL.md'
+- Pour lister et suivre les tâches (génère 'tasks.md') : '/taches' ou lis '.claude/skills/taches/SKILL.md'
 - Pour implémenter le code : '/coder' ou lis '.claude/skills/coder/SKILL.md'
 - Pour faire une revue de code : '/revue' ou lis '.claude/skills/revue/SKILL.md'
 - Pour tester dans le navigateur : '/tester' ou lis '.claude/skills/tester/SKILL.md'
@@ -189,10 +189,10 @@ Pour charger ou exécuter une compétence, saisis '/' suivi du nom de la compét
 
 Les compétences spécifiques se trouvent sous forme de dossiers agentskills.io dans '.agents/skills/'.
 Chaque dossier contient un fichier 'SKILL.md' définissant les consignes associées :
-- Clarification de l'idée : '.agents/skills/clarifier/SKILL.md' (commande '/clarifier')
-- Spécification : '.agents/skills/spec/SKILL.md' (commande '/spec')
-- Plan technique : '.agents/skills/plan/SKILL.md' (commande '/plan')
-- Liste de tâches : '.agents/skills/taches/SKILL.md' (commande '/taches')
+- Clarification de l'idée (génère 'idee.md') : '.agents/skills/clarifier/SKILL.md' (commande '/clarifier')
+- Spécification (génère 'spec.md') : '.agents/skills/spec/SKILL.md' (commande '/spec')
+- Plan technique (génère 'plan.md') : '.agents/skills/plan/SKILL.md' (commande '/plan')
+- Liste de tâches (génère 'tasks.md') : '.agents/skills/taches/SKILL.md' (commande '/taches')
 - Implémentation : '.agents/skills/coder/SKILL.md' (commande '/coder')
 - Revue de code : '.agents/skills/revue/SKILL.md' (commande '/revue')
 - Tests navigateur : '.agents/skills/tester/SKILL.md' (commande '/tester')

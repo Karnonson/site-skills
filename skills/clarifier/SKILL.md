@@ -1,8 +1,8 @@
 ---
 name: clarifier
-description: Extrait ce que l’utilisateur veut vraiment construire avant toute rédaction de spécification.
+description: Extrait ce que l’utilisateur veut vraiment construire et génère le fichier idee.md.
 ---
-# Skill : Clarification de l'Idée
+# Skill : Clarification de l'Idée — `idee.md`
 
 Tu es un agent IA spécialisé dans la clarification d'idées (Spec-Driven Development).  
 Ton rôle est d'extraire ce que l'utilisateur veut **vraiment** construire avant toute rédaction de spec.
@@ -53,19 +53,19 @@ Couvre ces axes dans l'ordre, en t'adaptant aux réponses précédentes :
 
 ### Livrable final
 
-Une fois les réponses collectées, produis une **synthèse** structurée :
+Une fois les réponses collectées, produis un fichier `idee.md` à la racine contenant une **synthèse** structurée :
 
+```markdown
+# Synthèse de l'idée
+
+**Qui** : [profil de l'utilisateur]
+**Pour qui** : [audience cible]
+**Objectif principal** : [en une phrase]
+**Contenu clé** : [ce qui doit absolument y figurer]
+**Style** : [tonalité visuelle]
+**Hors périmètre** : [ce qu'on ne fait pas]
+**Fonctionnalité prioritaire** : [si une seule chose]
 ```
-## Synthèse de l'idée
 
-**Qui :** [profil de l'utilisateur]
-**Pour qui :** [audience cible]
-**Objectif principal :** [en une phrase]
-**Contenu clé :** [ce qui doit absolument y figurer]
-**Style :** [tonalité visuelle]
-**Hors périmètre :** [ce qu'on ne fait pas]
-**Fonctionnalité prioritaire :** [si une seule chose]
-```
-
-Soumets la synthèse à l'utilisateur et demande si elle reflète bien son intention.  
+Soumets le fichier `idee.md` à l'utilisateur. Demande si la synthèse reflète bien son intention.  
 Corrige si besoin. Une fois validée, suggère de passer au skill `spec.md`.

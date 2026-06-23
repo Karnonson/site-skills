@@ -11,7 +11,9 @@ Tu définis le **QUOI** — ce que le site doit faire — **sans jamais mentionn
 
 ## Précondition
 
-Vérifie que `copilot-instructions.md` existe. Si absent, arrête et demande à l'utilisateur de le créer d'abord.
+Vérifie que le fichier `idee.md` existe et a été approuvé.  
+Vérifie également que le fichier `copilot-instructions.md` (ou `CLAUDE.md` / `AGENTS.md`) existe.  
+Si l'un d'eux est absent, arrête et demande à l'utilisateur de lancer `/clarifier` ou de configurer le projet d'abord.
 
 ---
 

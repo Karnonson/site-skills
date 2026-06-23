@@ -54,10 +54,10 @@ Saisis simplement la commande `/` suivie du nom de la compétence.
 
 ### Liste des Commandes :
 
-- `/clarifier` : Clarifier ton idée de projet.
-- `/spec` : Définir les spécifications fonctionnelles (QUOI).
-- `/plan` : Rédiger le plan technique (COMMENT).
-- `/taches` : Suivre la liste des tâches à accomplir.
+- `/clarifier` : Clarifier ton idée de projet (`idee.md`).
+- `/spec` : Définir les spécifications fonctionnelles (`spec.md`).
+- `/plan` : Rédiger le plan technique (`plan.md`).
+- `/taches` : Suivre la liste des tâches à accomplir (`tasks.md`).
 - `/coder` : Lancer l'implémentation complète du code.
 - `/revue` : Effectuer une revue de code rigoureuse.
 - `/tester` : Valider le rendu dans le navigateur.
